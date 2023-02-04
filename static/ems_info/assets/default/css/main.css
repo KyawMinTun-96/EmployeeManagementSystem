@@ -1,36 +1,242 @@
 *{
     margin: 0;
     padding: 0;
+    font-family: sans-serif;
+    color: rgb(0, 0, 0);
 }
 
 body{
     background-color: #fff;
-
 }
 
-h1,h2,h3,h4,h5,h6 {
-    font-family: sans-serif, monospace, Cambria, Georgia, Times, 'Times New Roman', serif;
-    color: rgb(0, 0, 0);
+h1,h2,h3,h4,h5,h6,
+a {
     text-align: center;
+    text-decoration: none;
 }
 
-.navigation {
-    background-color: #eef0f2;
-    box-shadow: 2px -1px 10px rgb(70, 70, 70);
-    height: 60px;
-    width: 100%;
+ul, ol {
+    list-style: none;
+}
+
+i {
+    font-size: 16px;
+    margin-right: 5px;
+}
+
+
+
+
+/*------------javascript class & id---------------*/
+.close {
+    position: absolute;
+    top: 0;
+    left: 18%;
+}
+
+
+
+
+
+
+
+
+
+
+/*-------Top Navigation--------*/
+.top_nav {
+    display: flex;
+    flex-wrap: nowrap;
+    height: 50px; 
+    border-bottom: 1.5px solid rgba(176, 176, 176, 0.386);  
 }
 
 .logo {
-    display: inline-block;
-    background-color: red;
-    height: 100%;
-    width: 30%;
+    margin-left: 50px;
+    line-height: 50px;
+    flex: 50%;
+}
+
+.logo a {
+    font-weight: 600;
+    color: #7b7b7b;
 }
 
 .menu {
-    display: inline-block;
-    background-color: green;
-    height: 100%;
-    width: 60%;
+    line-height: 50px;
 }
+
+ul.menu {
+    width: 200px;
+}
+
+ul li {
+    text-align: center;
+    /* border-bottom: 2px solid #000000; */
+}
+
+ul li a,
+ul li a i{
+    color: #7b7b7b;
+}
+
+.page_group {
+    display: flex;
+    height: 100vh;
+}
+
+.navigation {
+    background-color: #66b3f6;
+    width: 18%;
+    height: 100%;
+}
+
+.page_body {
+    background-color: #e9eaef;
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+}
+
+.page_content {
+    /* background-color: #bcbcbc; */
+    margin: 0 10px;
+    flex-grow: 1;
+}
+
+
+
+/* ------------------navigaion-------------- */
+.navigation{
+    position: relative;
+
+}
+
+.navigation .header {
+    position: absolute;
+    line-height: 50px;
+    right: -15%;
+}
+
+.header .drawer::before {
+    position: absolute;
+    content: '';
+    top: 8px;
+    left: -52%;
+    width: 35px;
+    height: 35px;
+    box-shadow: 1px 1px 5px #00000068;
+    background-color: rgba(255, 255, 255, 0.345);
+    border-radius: 0 5px 5px 0;
+    -webkit-border-radius: 0 5px 5px 0;
+    -moz-border-radius: 0 5px 5px 0;
+    -ms-border-radius: 0 5px 5px 0;
+    -o-border-radius: 0 5px 5px 0;
+}
+
+.drawer a {
+    position: relative;
+}
+
+.drawer i {
+    color: #000000;
+}
+
+.content_group .nav_logo{
+    border-bottom: 1px solid rgba(255, 255, 255, 0.822); 
+    text-align: center;
+    height: 100px;
+}
+
+.nav_logo a {
+    color: #fff;
+    font-size: 25px;
+    font-weight: 500;
+    line-height: 100px;
+}
+
+.content_menu > .list_item {
+    padding: 15px 0;
+    margin-left: 20px;
+}
+
+.content_menu > .list_item:hover a i {
+    color: #7b7b7b;
+}
+
+.content_menu .list_item a {
+    font-size: 16px;
+    color: #fff;
+}
+
+.nav_logo a i,
+.content_menu .list_item a i{
+    color: #fff;
+    width: 20px;
+}
+
+
+
+
+
+
+
+/*-------------home page----------------*/
+.h_body {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
+.h_title {
+    background-color: rgb(255, 255, 255);
+    margin: 30px 0;
+    padding: 30px 0;
+    box-shadow: 1px 1px 6px #00000068;
+}
+
+.h_title h2 {
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.h_body .h_content {
+    /* background-color: rgb(255, 0, 0); */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-top: 1px solid rgba(192, 189, 189, 0.687);
+}
+
+.h_box {
+    background-color: #fff;
+    margin: 10px;
+    width: 200px;
+    height: 80px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    box-shadow: 1px 1px 7px #5e5e5e8c;
+}
+
+.h_box  h3 {
+    background-color: #66b3f6;
+    font-size: 17px;
+    font-weight: default;
+    padding: 5px 0;
+    margin-bottom: 10px;
+}
+
+.h_box p {
+    font-size: 16px;
+    padding: 5px;
+}
+
+.h_box p span {
+    background-color: yellow;
+}
+
+

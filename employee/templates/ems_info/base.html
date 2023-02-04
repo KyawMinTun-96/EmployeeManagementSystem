@@ -14,10 +14,34 @@
     <!-- Main CSS -->
     <link rel="stylesheet" href="{% static 'ems_info/assets/default/css/main.css' %}">
 
+    <!-- Plackin Link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+
 </head>
 <body>
-    {% block content %}
 
-    {% endblock content %}
+    <div class="page_group">
+        <div class="navigation">
+            {% block navigation %}
+                {% include "ems_info/navigation.html" %}
+            {% endblock navigation %}
+        </div>
+
+        <div class="page_body">
+            {% block top_navigation %}
+                {% include "ems_info/top_navigation.html" %}
+            {% endblock top_navigation %}
+    
+            <div class="page_content">
+                {% block page-content %}
+                {% endblock page-content %}
+            </div>
+        </div>
+    </div>
+
+
+
+<!-- JavaScript -->
+<script src="{% static 'ems_info/assets/default/js/main.js'%}"></script>
 </body>
 </html>

@@ -1,0 +1,42 @@
+{% load static %}
+
+<div class="header">
+    <div class="drawer">
+        <a href=""><i class="fa-solid fa-bars"></i></a>
+    </div>
+</div>
+
+<aside>
+    <div class="content">
+        <div class="content_group">
+
+            <div class="nav_logo">
+                <a href="{% url 'home-page' %}">EMS</a>
+            </div>
+
+
+            <nav class="content_menu">
+                <div class="list_item">
+                    <a href="{% url 'home-page' %}"><i class="fa-solid fa-house-chimney"></i>Home</a>
+                </div>
+                <div class="list_item">
+                    <a href="{% url 'department-page' %}">
+                        <i class="fa-solid fa-users-between-lines"></i>Department List
+                    </a>
+                </div>
+                <div class="list_item">
+                    <a href="{% url 'employee-page' %}"><i class="fa-solid fa-id-card"></i>Employee List</a>
+                </div>
+                <div class="list_item">
+                    <a href="{% url 'position-page' %}"><i class="fa-solid fa-id-card-clip"></i>Position List</a>
+                </div>
+                <div class="list_item">
+                    <a href="{% url 'project-page' %}"><i class="fa-solid fa-chart-line"></i>Project List</a>
+                </div>
+            </nav>
+        </div>
+    </div>
+</aside>
+
+
+
