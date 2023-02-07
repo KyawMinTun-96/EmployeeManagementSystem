@@ -1,18 +1,13 @@
 from django.shortcuts import render
-#from employee.models import Department, Position, Employees
-
-
-
-# from django.shortcuts import redirect, render
+from employee.models import Department
 from django.http import HttpResponse
-# from employee_information.models import Department, Position, Employees
-# from django.contrib.auth import authenticate, login, logout
-# from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
-# import json
+import json
 
 
-# Create your views here.
+
 def home(request):
     context = {
         'page_title':'Home',
@@ -21,8 +16,10 @@ def home(request):
 
 
 def departments(request):
+    department_list = Department.objects.all()
     context = {
         'page_title':'Department',
+        'departments':department_list,
     }
     return render(request, 'ems_info/departments.html', context)
 
@@ -46,3 +43,54 @@ def employees(request):
         'page_title' : 'Employee',
     }
     return render(request, 'ems_info/employees.html', context)
+
+
+
+def add_departments(request):
+    department = {}
+    if request.method == 'GET':
+        data =  request.GET
+        id = ''
+        if 'id' in data:
+            id= data['id']
+        if id.isnumeric() and int(id) > 0:
+            department = Department.objects.filter(id=id).first()
+
+    context = {
+        'page_title' : department
+    }
+    return render(request, 'ems_info/add_department.html', context)
+
+
+
+def save_departments(request):
+    data = request.POST
+    resp = {'status': 'failed'}
+
+    try:
+        if(data['id']).isnumeric() and int(data['id']) > 0 :
+            save_department = Department.objects.filter(id = data['id']).update(name=data['name'],
+            description = data['description'], status = data['status'])
+
+        else:
+            save_department = Department(name=data['name'], description = data['description'], status=data['status'])
+            save_department.save()
+        resp['status'] = 'success'
+
+    except:
+        resp['statua'] = 'failed'
+    return HttpResponse(json.dumps(resp), content_type="application/json")
+
+
+
+def delete_departments(request):
+    data =  request.POST
+    resp = {'status' : 'failed'}
+    try:
+        Department.objects.filter(id = data['id']).delete()
+        resp['status'] = 'success'
+    except:
+        resp['status'] = 'failed'
+    return HttpResponse(json.dumps(resp), content_type="application/json")
+
+

@@ -2,15 +2,98 @@
 
 {% block page-content%}
 
-<div class="h_body">
+<div class="d_body">
 
-    <div class="h_title">
+    <div class="d_title">
         <h2>Department Page</h2>
+
+        <div class="d_add">
+            <button id="create_new">
+                <i class="fa-regular fa-plus"></i><span>Add</span>
+            </button>
+        </div>
     </div>
 
-    <div class="h_content">
+    <div class="d_content">
+        <table class="d_table">
+            <tr>
+                <th>No.</th>
+                <th>Department Name</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            {% for dep_list in departments%}
+            <tr>
+                <td>{{ dep_list.id}}.</td>
+                <td>{{dep_list.name}}</td>
+                <td>{{dep_list.description}}</td>
+                <td class="py-2 text-center">
+                    {% if dep_list.status == 1 %}
+                        <span class="active">Active</span>
+                    {% else %}
+                        <span class="inactive">Inactive</span>
+                    {% endif %}
+                </td>
+                <td class="px-2 text-center">
+                    <button class="edit_btn edit_data" data-id="{{ dep_list.pk }}"  type="button" title="Edit">
+                        <i class="fa-sharp fa-solid fa-pencil"></i>
+                    </button>
+                    <button class="delete_btn delete_data"  type="button" data-id="{{ dep_list.pk }}" title="Delete">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
     </div>
 
 </div>
 
 {% endblock page-content%}
+
+
+{% block script %}
+<script>
+    $(function() {
+        $('#create_new').click(function() {
+            uni_modal("Add New Department", "{% url 'add-department-page' %}");
+        });
+        $('.edit_data').click(function() {
+            uni_modal("Edit Department", "{% url 'add-department-page' %}?id=" + $(this).attr('data-id'));
+        })
+        $('.delete_data').click(function() {
+            _conf("Are you sure to delete this department?", "delete_department", [$(this).attr('data-id')])
+        });
+    });
+
+
+    function delete_department($id) {
+        start_loader();
+        $.ajax({
+            headers: {
+                "X-CSRFToken": '{{csrf_token}}'
+            },
+            url: "{% url 'delete-department-page' %}",
+            method: "POST",
+            data: {
+                id: $id
+            },
+            dataType: "json",
+            error: err => {
+                console.log(err)
+                alert_toast("An error occured.", 'error');
+                end_loader();
+            },
+            success: function(resp) {
+                if (typeof resp == 'object' && resp.status == 'success') {
+                    location.reload();
+                } else {
+                    alert_toast("An error occured.", 'error');
+                    end_loader();
+                }
+            }
+        });
+    }
+</script>
+{% endblock script %}

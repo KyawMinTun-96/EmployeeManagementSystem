@@ -1,16 +1,31 @@
 {% extends "ems_info/base.html" %} 
 
-{% block page-content%}
+{% block page-content %}
 
-<div class="h_body">
+<div class="e_body">
 
-    <div class="h_title">
+    <div class="e_title">
+
         <h2>Employee Page</h2>
+
+        <div class="e_add">
+            <button id="">
+                <i class="fa-regular fa-plus"></i><span>Add</span>
+            </button>
+        </div>
     </div>
 
-    <div class="h_content">
+    <div class="e_content">
+        <table>
+            <tr>
+                <th>Department Name</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </table>
     </div>
 
 </div>
 
-{% endblock page-content%}
+{% endblock page-content %}

@@ -6,7 +6,7 @@
 }
 
 body{
-    background-color: #fff;
+    background-color: #e9eaef;
 }
 
 h1,h2,h3,h4,h5,h6,
@@ -24,6 +24,11 @@ i {
     margin-right: 5px;
 }
 
+button {
+    border: none;
+    box-shadow: 1px 1px 7px #999;
+}
+
 
 
 
@@ -34,8 +39,51 @@ i {
     left: 18%;
 }
 
+.active, 
+.inactive {
+    width: 70px;
+    display: inline-block;
+    font-size: 14px;
+    color: #fff;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+
+.active {
+    background-color: #0de10d;
+}
+
+.inactive {
+    background-color: red;
+
+}
+
+.edit_btn,
+.delete_btn {
+    width: 30px;
+    height: 30px;
+    background-color: #fff;
+    display: inline-block;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+}
 
 
+.edit_btn i,
+.delete_btn i {
+    margin-right: 0;
+}
+
+
+.delete_btn i {
+    color: #ff4444;
+}
 
 
 
@@ -49,10 +97,11 @@ i {
     flex-wrap: nowrap;
     height: 50px; 
     border-bottom: 1.5px solid rgba(176, 176, 176, 0.386);  
+    margin-left: 9.5px;
 }
 
 .logo {
-    margin-left: 50px;
+    margin-left: 10px;
     line-height: 50px;
     flex: 50%;
 }
@@ -60,6 +109,7 @@ i {
 .logo a {
     font-weight: 600;
     color: #7b7b7b;
+    margin-left: 22px;
 }
 
 .menu {
@@ -81,35 +131,28 @@ ul li a i{
 }
 
 .page_group {
-    display: flex;
-    height: 100vh;
-}
 
-.navigation {
-    background-color: #66b3f6;
-    width: 18%;
-    height: 100%;
 }
 
 .page_body {
     background-color: #e9eaef;
-    width: 100%;
-    display: flex;
-    flex-flow: column;
+    margin-left: 190px;
 }
 
 .page_content {
-    /* background-color: #bcbcbc; */
     margin: 0 10px;
-    flex-grow: 1;
 }
 
 
 
 /* ------------------navigaion-------------- */
 .navigation{
-    position: relative;
-
+    position: fixed;
+    background-color: #66b3f6;
+    width: 190px;
+    height: 100%;
+    top: 0;
+    left: 0;
 }
 
 .navigation .header {
@@ -126,7 +169,8 @@ ul li a i{
     width: 35px;
     height: 35px;
     box-shadow: 1px 1px 5px #00000068;
-    background-color: rgba(255, 255, 255, 0.345);
+    background-color: #7b7b7b;;
+    /* background-color: rgb(255, 255, 255); */
     border-radius: 0 5px 5px 0;
     -webkit-border-radius: 0 5px 5px 0;
     -moz-border-radius: 0 5px 5px 0;
@@ -139,7 +183,8 @@ ul li a i{
 }
 
 .drawer i {
-    color: #000000;
+    /* color: #000000; */
+    color: #fff;
 }
 
 .content_group .nav_logo{
@@ -182,16 +227,22 @@ ul li a i{
 
 
 /*-------------home page----------------*/
-.h_body {
-    display: flex;
-    flex-flow: column;
+.h_body,
+.d_body,
+.e_body,
+.p_body,
+.pj_body {
     height: 100%;
 }
 
-.h_title {
-    background-color: rgb(255, 255, 255);
+.h_title,
+.d_title,
+.e_title,
+.p_title,
+.pj_title {
     margin: 30px 0;
     padding: 30px 0;
+    background-color: rgb(255, 255, 255);
     box-shadow: 1px 1px 6px #00000068;
 }
 
@@ -201,7 +252,6 @@ ul li a i{
 }
 
 .h_body .h_content {
-    /* background-color: rgb(255, 0, 0); */
     flex-grow: 1;
     display: flex;
     flex-direction: row;
@@ -236,7 +286,123 @@ ul li a i{
 }
 
 .h_box p span {
-    background-color: yellow;
+
 }
 
+
+
+
+
+/*-------------department page----------------*/
+.d_body {
+
+}
+
+.d_title,
+.e_title,
+.p_title,
+.pj_title {
+    margin: 30px 0 30px;
+    padding: 15px 30px;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.d_title h2, 
+.e_title h2,
+.p_title h2,
+.pj_title h2 {
+    font-size: 20px;
+    color: #7b7b7b;
+    margin-bottom: 0;
+}
+
+.d_title .d_add,
+.e_title .e_add,
+.p_title .p_add,
+.pj_title .pj_add {
+    line-height: 170%;
+    margin-left: auto;
+}
+
+.d_add button,
+.e_add button,
+.p_add button,
+.pj_add button {
+    display: inline-block;
+    background-color: #0de10d;
+    padding: 0 10px;
+    height: 100%;
+    cursor: pointer;
+}
+
+.d_add button i,
+.e_add button i,
+.p_add button i,
+.pj_add button i {
+    color: #fff;
+}
+
+.d_add button span,
+.e_add button span,
+.p_add button span,
+.pj_add button span {
+    color: #fff;
+} 
+
+.d_body .d_content {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 1px 1px 6px #00000068;
+    margin: 30px 0 30px;
+    padding: 30px 30px 50px;
+}
+
+.d_content .d_table {
+    border-collapse: collapse;
+    border: 1.5px solid #8d8d8d1a;
+}
+
+table, tr, th, td {
+    padding: 5px 2px;
+}
+
+table th {
+    font-size: 16px;
+    border: 1px solid #8d8d8d45;
+    border-top: 1.5px solid #000000;
+    border-bottom: 1.5px solid #000000;
+}
+
+table td {
+    padding: 5px 2px;
+    font-size: 16px;
+}
+
+tr:nth-child(even) {
+    background-color: #7b7b7b3d;
+}
+
+th:nth-child(1) {
+    min-width: 40px;
+}
+
+th:nth-child(2) {
+    width: 30%;
+}
+
+th:nth-child(3) {
+    width: 60%;
+}
+
+th:nth-child(4) {
+    min-width: 100px;
+    text-align: center;
+}
+
+th:nth-child(5) {
+    min-width: 150px;
+    text-align: center;
+}
 
