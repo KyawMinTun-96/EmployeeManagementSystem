@@ -32,7 +32,7 @@ button {
 
 
 
-/*------------javascript class & id---------------*/
+/*------------common class & id---------------*/
 .close {
     position: absolute;
     top: 0;
@@ -62,7 +62,8 @@ button {
 }
 
 .edit_btn,
-.delete_btn {
+.delete_btn,
+.view_btn {
     width: 30px;
     height: 30px;
     background-color: #fff;
@@ -76,18 +77,37 @@ button {
 
 
 .edit_btn i,
-.delete_btn i {
+.delete_btn i,
+.view_btn i {
     margin-right: 0;
 }
-
 
 .delete_btn i {
     color: #ff4444;
 }
 
+.view {
+    margin-bottom: 5px;
+}
 
 
+.view_list {
+    color: #66b3f6;
+    font-size: 16px;
+    font-weight: 400;
+    min-width: 100px;
+    display: inline-block;
+}
 
+
+.view span:last-child {
+    font-size: 15px;
+    color: #7b7b7b;
+}
+
+.modal-title {
+    color: #7b7b7b;
+}
 
 
 
@@ -278,6 +298,7 @@ ul li a i{
     font-weight: default;
     padding: 5px 0;
     margin-bottom: 10px;
+    color: #fff;
 }
 
 .h_box p {
@@ -330,7 +351,7 @@ ul li a i{
 .p_add button,
 .pj_add button {
     display: inline-block;
-    background-color: #0de10d;
+    background-color: #66b3f6;
     padding: 0 10px;
     height: 100%;
     cursor: pointer;
@@ -350,7 +371,10 @@ ul li a i{
     color: #fff;
 } 
 
-.d_body .d_content {
+.d_body .d_content,
+.p_body .p_content,
+.e_body .e_content,
+.pj_body .pj_content {
     width: 100%;
     height: 100%;
     background-color: rgb(255, 255, 255);
@@ -359,7 +383,10 @@ ul li a i{
     padding: 30px 30px 50px;
 }
 
-.d_content .d_table {
+.d_content .d_table,
+.p_content .p_table,
+.e_content .e_table,
+.pj_content .pj_table {
     border-collapse: collapse;
     border: 1.5px solid #8d8d8d1a;
 }
@@ -369,15 +396,17 @@ table, tr, th, td {
 }
 
 table th {
-    font-size: 16px;
+    font-size: 17px;
     border: 1px solid #8d8d8d45;
     border-top: 1.5px solid #000000;
     border-bottom: 1.5px solid #000000;
+    color: #7b7b7b;
+    font-weight: 400;
 }
 
 table td {
     padding: 5px 2px;
-    font-size: 16px;
+    font-size: 15px;
 }
 
 tr:nth-child(even) {
@@ -406,3 +435,41 @@ th:nth-child(5) {
     text-align: center;
 }
 
+
+
+
+
+
+
+
+
+
+
+/*----------------Employee---------------*/
+.e_table th:nth-child(2) {
+    width: 8%;
+}
+
+.e_table th:nth-child(3) {
+    width: 13%;
+}
+
+.e_table th:nth-child(4) {
+    width: 24%;
+    text-align: left;
+}
+
+.e_table th:nth-child(5) {
+    width: 24%;
+    text-align: left;
+}
+
+.e_table th:nth-child(6) {
+    min-width: 100px;
+    text-align: center;
+}
+
+.e_table th:nth-child(7) {
+    min-width: 200px;
+    text-align: center;
+}

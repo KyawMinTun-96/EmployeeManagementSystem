@@ -1,0 +1,53 @@
+<div class="container-fluid">
+    <dir class="row">
+        <div class="rol-md-12">
+            <div class="view">
+                <span class="view_list">Code: </span>
+                <span>{{employee.code}}</span>
+            </div>
+            <div class="view">
+                <span class="view_list">Name: </span>
+                <span>{{employee.firstname}} {{employee.middlename}} {{employee.lastname}}</span>
+            </div>
+            <div class="view">
+                <span class="view_list">Date of birth: </span>
+                <span>{{employee.dob | date:'d, M, Y' }}</span>
+            </div>
+            <div class="view">
+                <span class="view_list">Gender: </span>
+                <span>{{employee.gender}}</span>
+            </div>
+            <div class="view">
+                <span class="view_list">Email: </span>
+                <span>{{employee.email}}</span>
+            </div>
+            <div class="view">
+                <span class="view_list">Contact: </span>
+                <span>{{employee.contact}}</span>
+            </div>
+            <div class="view">
+                <span class="view_list">Address: </span>
+                <span>{{employee.address}}</span>
+            </div>
+            <div class="view">
+                <span class="view_list">Department: </span>
+                <span>{{employee.department_id}}</span>
+            </div>
+            <div class="view">
+                <span class="view_list">Position: </span>
+                <span>{{employee.position_id}}</span>
+            </div>
+            <div class="view">
+                <span class="view_list">Status: </span>
+                <span style="text-align:center;">
+                    {% if employee.status == 1 %}
+                    <span class="active text-white">Active</span>
+                    {% endif %}
+                    {% if employee.status == 0 %}
+                    <span class="inactive text-white">Inactive</span>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </dir>
+</div>

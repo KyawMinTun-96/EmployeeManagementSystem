@@ -9,23 +9,100 @@
         <h2>Employee Page</h2>
 
         <div class="e_add">
-            <button id="">
+            <button id="create_new">
                 <i class="fa-regular fa-plus"></i><span>Add</span>
             </button>
         </div>
     </div>
 
     <div class="e_content">
-        <table>
+        <table class="e_table">
             <tr>
-                <th>Department Name</th>
-                <th>Description</th>
+                <th>No.</th>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Position</th>
                 <th>Status</th>
                 <th>Action</th>
             </tr>
+            {% for employee in employees %}
+            <tr>
+                <td>{{employee.id}}</td>
+                <td>{{employee.code}}</td>
+                <td>{{ employee.firstname }} {{ employee.middlename }} {{ employee.lastname }}</td>
+                <td>{{employee.department_id}}</td>
+                <td>{{employee.position_id}}</td>
+                <td class="py-2 text-center">
+                    {% if employee.status == 1 %}
+                        <span class="active">Active</span>
+                    {% else %}
+                        <span class="inactive">Inactive</span>
+                    {% endif %}
+                </td>
+                <td class="px-2 text-center">
+                    <button class="view_btn view_data" data-id="{{ employee.pk}}" type="button" title="Details">
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                    <button class="edit_btn edit_data" data-id="{{ employee.pk }}"  type="button" title="Edit">
+                        <i class="fa-sharp fa-solid fa-pencil"></i>
+                    </button>
+                    <button class="delete_btn delete_data"  type="button" data-id="{{ employee.pk }}" title="Delete">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
         </table>
     </div>
-
 </div>
-
 {% endblock page-content %}
+
+
+{% block script %}
+<script>
+    $(function() {
+        $('#create_new').click(function() {
+            uni_modal("Add New Employee", "{% url 'add-employee-page' %}", 'modal-lg')
+        })
+        $('.edit_data').click(function() {
+            uni_modal("Edit Employee", "{% url 'add-employee-page' %}?id=" + $(this).attr('data-id'), 'modal-lg')
+        })
+        $('.delete_data').click(function() {
+            _conf("Are you sure to delete this position?", "delete_employee", [$(this).attr('data-id')])
+        })
+        $('.view_data').click(function() {
+            uni_modal("Employee Info", "{% url 'view-employee' %}?id=" + $(this).attr('data-id'), "mid-large")
+        });
+    });
+
+    function delete_employee($id) {
+        start_loader();
+
+        $.ajax({
+            headers: {
+                "X-CSRFToken": "{{csrf_token}}"
+            },
+            url: "{% url 'delete-employee-page' %}",
+            method: "POST",
+            data: {
+                id: $id
+            },
+            dataType: "json",
+            error: err => {
+                console.log(err)
+                alert_toast("An error occured", 'error');
+                end_loader();
+            },
+            success: function(resp) {
+                if(typeof resp == 'object' && resp.status == 'success') {
+                    location.reload();
+                }else {
+                    alert_toast("An error occured.", 'error');
+                    end_loader();
+                }
+            }
+        });
+    }
+</script>
+{% endblock script %}

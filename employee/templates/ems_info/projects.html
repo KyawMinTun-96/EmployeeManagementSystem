@@ -8,19 +8,45 @@
         <h2>Project Page</h2>
 
         <div class="pj_add">
-            <button id="">
+            <button id="create_new">
                 <i class="fa-regular fa-plus"></i><span>Add</span>
             </button>
         </div>
     </div>
 
     <div class="pj_content">
-        <table>
+        <table class="pj_table">
             <tr>
-                <th>Department Name</th>
-                <th>Description</th>
+                <th>No.</th>
+                <th>Project Name</th>
+                <th>Employee Name</th>
+                <th>Start Date</th>
                 <th>Status</th>
                 <th>Action</th>
+            </tr>
+            <tr>
+                <td>1.</td>
+                <td>E-commerence Project</td>
+                <td>Kyaw Min Tun</td>
+                <td>1, Jan, 2022</td>
+                <td class="py-2 text-center">
+                    {% if project.status == 1 %}
+                        <span class="active">Completed</span>
+                    {% else %}
+                        <span class="inactive">Pending</span>
+                    {% endif %}
+                </td>
+                <td class="px-2 text-center">
+                    <button class="view_btn view_data" data-id="{{ employee.pk}}" type="button" title="Details">
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                    <button class="edit_btn edit_data" data-id="{{ employee.pk }}"  type="button" title="Edit">
+                        <i class="fa-sharp fa-solid fa-pencil"></i>
+                    </button>
+                    <button class="delete_btn delete_data"  type="button" data-id="{{ employee.pk }}" title="Delete">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                </td>
             </tr>
         </table>
     </div>
