@@ -1,20 +1,45 @@
 from django.shortcuts import render
-from employee.models import Department, Position, Employee
+from employee.models import Department, Position, Employee, Project
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 import json
 
+# @login_required
 def home(request):
     context = {
         'page_title':'Home',
         'total_department':len(Department.objects.filter(status=1).all()),
         'total_position' : len(Position.objects.filter(status=1).all()),
-        'total_employee' : len(Employee.objects.filter(status=1).all())
+        'total_employee' : len(Employee.objects.filter(status=1).all()),
+        'total_project' : len(Project.objects.filter(status=1).all())
     }
     return render(request, 'ems_info/home.html', context)
 
+def login_user(request):
+    logout(request)
+    resp = {"status":'failed','msg':''}
+    username = ''
+    password = ''
+    if request.POST:
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                resp['status']='success'
+            else:
+                resp['msg'] = "Incorrect username or password"
+        else:
+            resp['msg'] = "Incorrect username or password"
+    return HttpResponse(json.dumps(resp),content_type='application/json')
+
+def logoutuser(request):
+    logout(request)
+    return redirect('/')
 
 def departments(request):
     department_list = Department.objects.all()
@@ -24,10 +49,11 @@ def departments(request):
     }
     return render(request, 'ems_info/departments.html', context)
 
-
 def projects(request):
+    project_list = Project.objects.all()
     context = {
         'page_title' : 'Project',
+        'projects' : project_list,
     }
     return render(request, 'ems_info/projects.html', context)
 
@@ -38,9 +64,6 @@ def employees(request):
         'employees' : employee_list,
     }
     return render(request, 'ems_info/employees.html', context)
-
-
-
 
 def positions(request):
     position_list = Position.objects.all()
@@ -140,9 +163,6 @@ def save_positions(request):
     return HttpResponse(json.dumps(resp), content_type="application/json")
 
 
-
-
-
 def save_employees(request):
     data =  request.POST
     resp = {'status':'failed'}
@@ -183,7 +203,6 @@ def delete_departments(request):
     return HttpResponse(json.dumps(resp), content_type="application/json")
 
 
-
 def delete_positions(request):
     data = request.POST
     resp = {'status' : 'failed'}
@@ -204,7 +223,6 @@ def delete_employees(request):
     except:
         resp['status'] = 'failed'
     return HttpResponse(json.dumps(resp), content_type="application/json")
-
 
 
 def view_employee(request):
@@ -228,3 +246,79 @@ def view_employee(request):
     }
 
     return render(request, 'ems_info/view_employee.html', context)
+
+
+def add_projects(request):
+
+    project = {}
+    departments = Department.objects.filter(status=1).all()
+
+    if request.method == 'GET':
+        data = request.GET
+        id = ''
+        if 'id' in data:
+            id = data['id']
+        if id.isnumeric() and int(id) > 0:
+            project = Project.objects.filter(id=id).first()
+
+    context = {
+        'project' : project,
+        'departments' : departments
+    }
+
+    return render(request, 'ems_info/add_project.html', context )
+
+
+def save_projects(request):
+    data = request.POST
+    resp = {'status': 'failed'}
+
+    try:
+        dept = Department.objects.filter(id=data['department_id']).first()
+        if(data['id']).isnumeric() and int(data['id']) > 0 :
+            save_project = Project.objects.filter(id = data['id']).update(name=data['name'],
+            department_id = dept, start_date = data['start_date'], end_date= data['end_date'], status = data['status'])
+
+        else:
+            save_project = Project(name=data['name'], department_id = dept, 
+            start_date = data['start_date'], end_date= data['end_date'], status = data['status'])
+            save_project.save()
+
+        resp['status'] = 'success'
+
+    except Exception:
+        resp['statua'] = 'failed'
+        print(Exception)
+        print(json.dumps({'name':data['name'], 'department_id': data['department_id'], 'start_date': data['start_date'], 'end_date': data['end_date'], 'status': data['status']}))
+    return HttpResponse(json.dumps(resp), content_type="application/json")
+
+def delete_projects(request):
+    data = request.POST
+    resp = {'status': ''}
+    try:
+        Project.objects.filter(id = data['id']).delete()
+        resp['status'] = 'success'
+    except:
+        resp['status'] = 'failed'
+    return HttpResponse(json.dumps(resp), content_type='application/json');
+
+
+def view_project(request):
+
+    project = {}
+    departments = Department.objects.filter(status=1).all()
+
+    if request.method == 'GET':
+        data = request.GET
+        id = ''
+        if 'id' in data:
+            id = data['id']
+
+        if id.isnumeric() and int(id) > 0:
+            project = Project.objects.filter(id=id).first()
+
+    context = {
+        'project' : project,
+        'departments' : departments,
+    }
+    return render(request, 'ems_info/view_projects.html', context)

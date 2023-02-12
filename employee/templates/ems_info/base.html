@@ -14,38 +14,11 @@
     <!-- Plugin Link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <link rel="stylesheet" href="{% static 'ems_info/assets/bootstrap/css/bootstrap.min.css' %}">
-    
-
-
-    <!-- <link rel="stylesheet" href="{% static 'ems_info/assets/material-admin/vendors/mdi/css/materialdesignicons.min.css' %}"> -->
-    <!-- <link rel="stylesheet" href="{% static 'ems_info/assets/material-admin/vendors/css/vendor.bundle.base.css' %}"> -->
-    <!-- endinject -->
-    
-    <!-- Plugin css for this page -->
-    <!-- <link rel="stylesheet" href="{% static 'ems_info/assets/material-admin/vendors/flag-icon-css/css/flag-icon.min.css' %}">
-    <link rel="stylesheet" href="{% static 'ems_info/assets/material-admin/vendors/jvectormap/jquery-jvectormap.css' %}"> -->
-    <!-- End plugin css for this page -->
-    <!-- Layout styles -->
-    <!-- <link rel="stylesheet" href="{% static 'ems_info/assets/material-admin/css/demo/style.css' %}"> -->
-    <!-- End layout styles -->
-    <!-- <link rel="shortcut icon" href="{% static 'ems_info/assets/material-admin/images/favicon.png' %}" /> -->
-
-
-
-
-
-
-
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="{% static 'ems_info/assets/default/css/main.css' %}">
 
-
-
-
-
     <!-- jQuery -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script> -->
     <script src="{% static 'ems_info/assets/default/js/jquery-3.6.0.min.js' %}"></script>
     <script src="{% static 'ems_info/assets/bootstrap/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'ems_info/assets/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
@@ -111,8 +84,6 @@
 
 <!-- JavaScript -->
 <script src="{% static 'ems_info/assets/default/js/main.js'%}"></script>
-
-
 <script>
         window.start_loader = function() {
             $('body').removeClass('loaded')
@@ -133,6 +104,7 @@
                 success: function(resp) {
 
                     if (resp) {
+                        
                         $('#uni_modal .modal-title').html($title);
                         $('#uni_modal .modal-body').html(resp);
                         
@@ -170,10 +142,5 @@
 
         });
 </script>
-
-<!-- <script src="{% static 'ems_info/assets/material-admin/vendors/js/vendor.bundle.base.js' %}"></script>
-<script src="{% static 'ems_info/assets/material-admin/js/material.js' %}"></script>
-<script src="{% static 'ems_info/assets/material-admin/js/misc.js' %}"></script>
-<script src="{% static 'ems_info/assets/material-admin/js/dashboard.js' %}"></script> -->
 </body>
 </html>

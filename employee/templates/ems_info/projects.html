@@ -18,39 +18,99 @@
         <table class="pj_table">
             <tr>
                 <th>No.</th>
-                <th>Project Name</th>
-                <th>Employee Name</th>
+                <th>Name</th>
+                <th>Department</th>
                 <th>Start Date</th>
+                <th>End Date</th>
                 <th>Status</th>
                 <th>Action</th>
             </tr>
+            {% for project in projects %}
             <tr>
-                <td>1.</td>
-                <td>E-commerence Project</td>
-                <td>Kyaw Min Tun</td>
-                <td>1, Jan, 2022</td>
+                <td>{{project.id}}</td>
+                <td>{{project.name}}</td>
+                <td>{{project.department_id}}</td>
+                <td>{{project.start_date | date:'d, M, Y'}}</td>
+                <td>{{project.end_date | date:'d, M, Y'}}</td>
                 <td class="py-2 text-center">
                     {% if project.status == 1 %}
-                        <span class="active">Completed</span>
+                        <span class="active">Complete</span>
                     {% else %}
                         <span class="inactive">Pending</span>
                     {% endif %}
                 </td>
                 <td class="px-2 text-center">
-                    <button class="view_btn view_data" data-id="{{ employee.pk}}" type="button" title="Details">
+                    <button class="view_btn view_data" data-id="{{ project.pk}}" type="button" title="Details">
                         <i class="fa-solid fa-eye"></i>
                     </button>
-                    <button class="edit_btn edit_data" data-id="{{ employee.pk }}"  type="button" title="Edit">
+                    <button class="edit_btn edit_data" data-id="{{ project.pk }}"  type="button" title="Edit">
                         <i class="fa-sharp fa-solid fa-pencil"></i>
                     </button>
-                    <button class="delete_btn delete_data"  type="button" data-id="{{ employee.pk }}" title="Delete">
+                    <button class="delete_btn delete_data"  type="button" data-id="{{ project.pk }}" title="Delete">
                         <i class="fa-solid fa-trash-can"></i>
                     </button>
                 </td>
             </tr>
+            {% endfor %}
         </table>
     </div>
 
 </div>
 
 {% endblock page-content %}
+
+
+{% block script %}
+<script>
+    $(function() {
+        $('#create_new').click(function() {
+            uni_modal('Add New Project', "{% url 'add-project-page' %}")
+        });
+
+        $('.edit_data').click(function() {
+            uni_modal('Edit Project', "{% url 'add-project-page' %}?id=" + $(this).attr('data-id'))
+        });
+
+        $('.delete_data').click(function() {
+            _conf('Are you sure to delete this project?', 'delete_project', [$(this).attr('data-id')])
+        });
+
+        $('.view_data').click(function() {
+            uni_modal('Project Info', "{% url 'view-project-page' %}?id=" + $(this).attr('data-id'))
+        })
+    });
+</script>
+
+<script>
+    function delete_project($id) {
+        start_loader()
+
+        $.ajax({
+            headers: {
+                "X-CSRFToken": "{{csrf_token}}"
+            },
+            url: "{% url 'delete-project-page' %}",
+            method: 'POST',
+            data: {
+                id: $id
+            },
+            dataType: 'json',
+            error: err => {
+                console.log(err);
+                alert_toast("An error occured", 'error');
+                end_loader();
+            },
+            success: function(resp) {
+                if(typeof resp == 'object' && resp.status == 'success') {
+                    location.reload();
+                }else {
+                    alert_toast("An error occured.", 'error');
+                    end_loader();
+                }
+                
+            }
+
+        });
+    }
+</script>
+{% endblock script %}

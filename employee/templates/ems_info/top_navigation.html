@@ -5,10 +5,16 @@
         <a href="{% url 'home-page' %}">EMS System</a>
     </div>
     <ul class="menu">
-        <li>
-            <a href=""><i class="fa-solid fa-user"></i>Admin</a>
-        </li>
-        <!-- <li>Zaw Zaw</li>
-        <li>Maung Maung</li> -->
+        <li class="nav-item dropdown">
+            <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#">
+                <i class="fa-solid fa-user"></i>
+            </a>
+            <ul class="dropdown-menu">
+                <a href="{% url 'redirect-admin' %}">
+                    <i class="fa-solid fa-user"></i>Admin
+                </a>
+              <li><a class="dropdown-item" href="{% url 'logout' %}">Log Out</a></li>
+            </ul>
+          </li>
     </ul>
 </div>

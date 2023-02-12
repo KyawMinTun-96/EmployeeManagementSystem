@@ -47,3 +47,18 @@ class Employee(models.Model):
     def __str__(self):
         return self.firstname + ' ' + self.middlename + ' ' + self.lastname + ' ' + self.position_id.id + ' ' + self.department_id.id
 
+
+
+class Project(models.Model):
+
+    name = models.CharField(max_length=100, blank=True)
+    department_id = models.ForeignKey(Department, on_delete=models.CASCADE)
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
+    status = models.IntegerField()
+    create_date = models.DateTimeField(default=timezone.now)
+    update_date = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name + ' ' + self.department_id.id + ' '
+

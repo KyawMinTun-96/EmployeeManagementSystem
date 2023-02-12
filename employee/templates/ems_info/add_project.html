@@ -1,0 +1,121 @@
+<div class="container-fluid">
+    <form action="" id="project-form">
+        <input type="hidden" name="id" value="{% if project.pk %}{{project.pk}}{% endif %}">
+        <div class="form-group mb-3">
+            <label for="name" class="control-label">Name</label>
+            <input type="text" name="name" id="firstname" class="form-control form-control-sm rounded-0" value="{% if project.name %}{{project.name}}{% endif %}">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="department_id" class="control-label">Department</label>
+            <select name="department_id" id="department_id" class="form-select form-select-sm rounded-0">
+                {% if not project.department_id %}
+                <option value="1" disabled selected>Please Select Here</option>
+                {% else %}
+                <option value="1" disabled>Please Select Here</option>
+                {% endif %}
+                {% for department in departments %}
+                    {% if project.department_id.id and project.department_id.id == department.id %}
+                    <option value="{{ department.id }}" selected>{{ department.name }}</option>
+                    {% else %}
+                    <option value="{{ department.id }}">{{ department.name }}</option>
+                    {% endif %}
+                {% endfor %}
+
+            </select>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="start_date" class="control-label">Start Date</label>
+            <input type="date" name="start_date" id="start_date" class="form-control form-control-sm rounded-0" value="{% if project.start_date %}{{ project.start_date|date:'Y-m-d' }}{% endif %}">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="end_date" class="control-label">End Date</label>
+            <input type="date" name="end_date" id="end_date" class="form-control form-control-sm rounded-0" value="{% if project.end_date %}{{ project.end_date|date:'Y-m-d' }}{% endif %}">
+        </div>
+        <div class="form-group mb-3">
+            <label for="status" class="control-label">Status</label>
+            <select name="status" id="status" class="form-select form-select-sm rounded-0">
+                {% if project.status == 1 %}
+                <option value="1" selected >Completed</option>
+                {% else %}
+                <option value="1" >Completed</option>
+                {% endif %}
+    
+                {% if project.status == 0 %}
+                <option value="0" selected>Pending</option>
+                {% else %}
+                <option value="0">Pending</option>
+                {% endif %}
+            </select>
+        </div>
+    </form>
+</div>
+
+
+<script>
+$(document).ready(function() {
+        $('#project-form').submit(function(e) {
+            e.preventDefault();
+            var _this = $(this);
+
+            $('.err-msg').remove();
+
+            var el = $('<div>')
+            el.addClass("alert alert-danger err-msg")
+            el.hide()
+            if (_this[0].checkValidity() == false) {
+                _this[0].reportValidity();
+                return false;
+            }
+
+
+
+            start_loader();
+            
+
+            
+            $.ajax({
+                headers: {
+                    "X-CSRFToken": '{{csrf_token}}'
+                },
+                url: "{% url 'save-project-page' %}",
+                data: new FormData($(this)[0]),
+                cache: false,
+                contentType: false,
+                processData: false,
+                method: 'POST',
+                type: 'POST',
+                dataType: 'json',
+                error: err => {
+                    console.log(err)
+                    alert("An error occured", 'error');
+                    end_loader();
+                },
+                success: function(resp) {
+                    if (typeof resp == 'object' && resp.status == 'success') {
+                        el.removeClass("alert alert-danger err-msg")
+                        location.reload();
+
+                    } else if (resp.status == 'failed' && !!resp.msg) {
+
+                        el.text(resp.msg);
+
+                    } else {
+
+                        el.text("An error occured", 'error');
+                        end_loader();
+                        console.err(resp);
+
+                    }
+
+                    _this.prepend(el);
+                    el.show('slow');
+                    $("html, body, .modal").scrollTop(0);
+                    end_loader();
+                }
+            });
+        });
+    });
+</script>

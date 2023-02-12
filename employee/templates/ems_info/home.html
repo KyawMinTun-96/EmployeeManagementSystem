@@ -1,4 +1,4 @@
-{% extends "ems_info/base.html" %} 
+{% extends "ems_info/base.html" %} {% load humanize %}
 
 {% block page-content%}
 
@@ -23,7 +23,7 @@
             </div>
             <div class="h_box">
                 <h3>Project List</h3>
-                <p>Total Count: <span>200</span></p>
+                <p>Total Count: <span>{{total_project}}</span></p>
             </div>
         </div>
     </div>
