@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 import json
 
-# @login_required
+@login_required
 def home(request):
     context = {
         'page_title':'Home',
@@ -37,10 +37,12 @@ def login_user(request):
             resp['msg'] = "Incorrect username or password"
     return HttpResponse(json.dumps(resp),content_type='application/json')
 
+
 def logoutuser(request):
     logout(request)
     return redirect('/')
 
+@login_required
 def departments(request):
     department_list = Department.objects.all()
     context = {
@@ -49,6 +51,7 @@ def departments(request):
     }
     return render(request, 'ems_info/departments.html', context)
 
+@login_required
 def projects(request):
     project_list = Project.objects.all()
     context = {
@@ -57,6 +60,7 @@ def projects(request):
     }
     return render(request, 'ems_info/projects.html', context)
 
+@login_required
 def employees(request):
     employee_list = Employee.objects.all()
     context = {
@@ -64,7 +68,7 @@ def employees(request):
         'employees' : employee_list,
     }
     return render(request, 'ems_info/employees.html', context)
-
+@login_required
 def positions(request):
     position_list = Position.objects.all()
     context = {
@@ -73,6 +77,7 @@ def positions(request):
     }
     return render(request, 'ems_info/positions.html', context)
 
+@login_required
 def add_departments(request):
     department = {}
     if request.method == 'GET':
@@ -88,6 +93,8 @@ def add_departments(request):
     }
     return render(request, 'ems_info/add_department.html', context)
 
+
+@login_required
 def add_positions(request):
     position = {}
     if request.method == 'GET':
@@ -103,7 +110,7 @@ def add_positions(request):
     }
     return render(request, 'ems_info/add_position.html', context)
 
-
+@login_required
 def add_employees(request):
     employee = {}
     departments = Department.objects.filter(status=1).all()
@@ -125,6 +132,7 @@ def add_employees(request):
     }
     return render(request, 'ems_info/add_employee.html', context)
 
+@login_required
 def save_departments(request):
     data = request.POST
     resp = {'status': 'failed'}
@@ -143,7 +151,7 @@ def save_departments(request):
         resp['statua'] = 'failed'
     return HttpResponse(json.dumps(resp), content_type="application/json")
 
-
+@login_required
 def save_positions(request):
     data = request.POST
     resp = {'status': 'failed'}
@@ -162,7 +170,7 @@ def save_positions(request):
         resp['statua'] = 'failed'
     return HttpResponse(json.dumps(resp), content_type="application/json")
 
-
+@login_required
 def save_employees(request):
     data =  request.POST
     resp = {'status':'failed'}
@@ -187,11 +195,11 @@ def save_employees(request):
             resp['status'] = 'success'
         except Exception:
             resp['status'] = 'failed'
-            print(Exception)
-            print(json.dumps({"code":data['code'], "firstname" : data['firstname'],"middlename" : data['middlename'],"lastname" : data['lastname'],"dob" : data['dob'],"gender" : data['gender'],"contact" : data['contact'],"email" : data['email'],"address" : data['address'],"department_id" : data['department_id'],"position_id" : data['position_id'],"hired_date" : data['hired_date'],"salary" : data['salary'],"status" : data['status']}))
+            # print(Exception)
+            # print(json.dumps({"code":data['code'], "firstname" : data['firstname'],"middlename" : data['middlename'],"lastname" : data['lastname'],"dob" : data['dob'],"gender" : data['gender'],"contact" : data['contact'],"email" : data['email'],"address" : data['address'],"department_id" : data['department_id'],"position_id" : data['position_id'],"hired_date" : data['hired_date'],"salary" : data['salary'],"status" : data['status']}))
     return HttpResponse(json.dumps(resp), content_type="application/json")
 
-
+@login_required
 def delete_departments(request):
     data =  request.POST
     resp = {'status' : 'failed'}
@@ -202,7 +210,7 @@ def delete_departments(request):
         resp['status'] = 'failed'
     return HttpResponse(json.dumps(resp), content_type="application/json")
 
-
+@login_required
 def delete_positions(request):
     data = request.POST
     resp = {'status' : 'failed'}
@@ -213,7 +221,7 @@ def delete_positions(request):
         resp['statu'] = 'failed'
     return HttpResponse(json.dumps(resp), content_type="application/json")
 
-
+@login_required
 def delete_employees(request):
     data =  request.POST
     resp = {'status':''}
@@ -224,7 +232,7 @@ def delete_employees(request):
         resp['status'] = 'failed'
     return HttpResponse(json.dumps(resp), content_type="application/json")
 
-
+@login_required
 def view_employee(request):
     employee = {}
     departments = Department.objects.filter(status=1).all()
@@ -247,7 +255,7 @@ def view_employee(request):
 
     return render(request, 'ems_info/view_employee.html', context)
 
-
+@login_required
 def add_projects(request):
 
     project = {}
@@ -268,7 +276,7 @@ def add_projects(request):
 
     return render(request, 'ems_info/add_project.html', context )
 
-
+@login_required
 def save_projects(request):
     data = request.POST
     resp = {'status': 'failed'}
@@ -288,10 +296,12 @@ def save_projects(request):
 
     except Exception:
         resp['statua'] = 'failed'
-        print(Exception)
-        print(json.dumps({'name':data['name'], 'department_id': data['department_id'], 'start_date': data['start_date'], 'end_date': data['end_date'], 'status': data['status']}))
+        # print(Exception)
+        # print(json.dumps({'name':data['name'], 'department_id': data['department_id'], 'start_date': data['start_date'], 'end_date': data['end_date'], 'status': data['status']}))
     return HttpResponse(json.dumps(resp), content_type="application/json")
 
+
+@login_required
 def delete_projects(request):
     data = request.POST
     resp = {'status': ''}
@@ -302,7 +312,7 @@ def delete_projects(request):
         resp['status'] = 'failed'
     return HttpResponse(json.dumps(resp), content_type='application/json');
 
-
+@login_required
 def view_project(request):
 
     project = {}

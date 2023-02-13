@@ -1,19 +1,31 @@
 {% load static %}
 
 <div class="top_nav">
+    <div class="header">
+        <div class="drawer" onclick="click_drawer()">
+            <button type="button">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </div>
     <div class="logo"> 
         <a href="{% url 'home-page' %}">EMS System</a>
     </div>
     <ul class="menu">
         <li class="nav-item dropdown">
-            <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#">
-                <i class="fa-solid fa-user"></i>
+            <a data-bs-toggle="dropdown" href="#">
+                <i class="fa-solid fa-user"></i>{{ user.username }}
             </a>
             <ul class="dropdown-menu">
-                <a href="{% url 'redirect-admin' %}">
-                    <i class="fa-solid fa-user"></i>Admin
-                </a>
-              <li><a class="dropdown-item" href="{% url 'logout' %}">Log Out</a></li>
+                <li class="profile">
+                    <a class="dropdown-item" href="{% url 'redirect-admin' %}">
+                        <i class="fa-solid fa-user"></i>Admin
+                    </a>
+                </li>
+                <li class="profile">
+                    <a class="dropdown-item" href="{% url 'logout' %}">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
+                </li>
             </ul>
           </li>
     </ul>

@@ -25,58 +25,48 @@
     <script src="{% static 'ems_info/assets/bootstrap/js/popper.min.js' %}"></script>
 </head>
 <body>
-    <div class="body-wrapper">
-        <div class="main-wrapper">
-            <div class="page-wrapper full-page-wrapper d-flex align-items-center justify-content-center">
-                <main class="auth-page">
-                    <div class="mdc-layout-grid">
-                        <div class="mdc-layout-grid__inner justify-content-center">
-                            <div class="mdc-layout-grid__cell--span-2-desktop"></div>
-                            <div class="mdc-card mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-1-tablet mb-5">
-                                <h3 class="text-center">Employee Information System</h3>
-                            </div>
-                        </div>
-                        <div class="mdc-layout-grid__inner">
-                            <div class="stretch-card mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-1-tablet"></div>
-                            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-6-tablet">
-                                <div class="mdc-card">
-                                    <form id="login">
-                                        {% csrf_token %}
-                                        <div class="mdc-layout-grid">
-                                            <div class="mdc-layout-grid__inner">
-                                                <form action="" id="login" method="post">
-                                                    <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
-                                                        <div class="mdc-text-field w-100">
-                                                            <input class="mdc-text-field__input" name="username" id="text-field-hero-input">
-                                                            <div class="mdc-line-ripple"></div>
-                                                            <label for="text-field-hero-input" class="mdc-floating-label">Username</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
-                                                        <div class="mdc-text-field w-100">
-                                                            <input class="mdc-text-field__input" name="password" type="password" id="text-field-hero-input">
-                                                            <div class="mdc-line-ripple"></div>
-                                                            <label for="text-field-hero-input" class="mdc-floating-label">Password</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
-                                                        <button class="mdc-button mdc-button--raised w-100">
-                                                            Login
-                                                        </button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="stretch-card mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-1-tablet"></div>
-                        </div>
-                    </div>
-                </main>
+    <div class="login_page">
+        <div class="login_title">
+            <h1>Employee Management System</h1>
+        </div>
+
+
+        <div class="login_box">
+            <div class="l_box_title">
+                <h3>Login</h3>
             </div>
+
+            <form action="" id="login" method="post">
+                {% csrf_token %}
+                <div class="form-group mb-3">
+                    <label for="name" class="control-label">Username:</label>
+                    <input type="text" class="form-control form-control-sm rounded-0" name="username" id="name">
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label for="pwd" class="control-label">Password:</label>
+                    <input type="password" name="password" id="pwd" class="form-control form-control-sm rounded-0">
+                </div>
+                
+                <div class="login_btn">
+                    <button class="btn btn-sm">login</button>
+                </div>
+            </form>
         </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+    
+    <!--------javascript------------>
     <script>
         window.start_loader = function() {
             $('body').removeClass('loaded')
