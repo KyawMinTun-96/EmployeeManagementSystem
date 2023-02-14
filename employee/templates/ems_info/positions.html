@@ -18,7 +18,7 @@
         <table class="p_table">
             <tr>
                 <th>No.</th>
-                <th>Position Name</th>
+                <th>Name</th>
                 <th>Description</th>
                 <th>Status</th>
                 <th>Action</th>
@@ -71,7 +71,6 @@
     });
 
     function delete_position($id) {
-        start_loader();
 
         $.ajax({
             headers: {
@@ -86,14 +85,12 @@
             error: err => {
                 console.log(err)
                 alert_toast("An error occured", 'error');
-                end_loader();
             },
             success: function(resp) {
                 if(typeof resp == 'object' && resp.status == 'success') {
                     location.reload();
                 }else {
                     alert_toast("An error occured.", 'error');
-                    end_loader();
                 }
             }
         });

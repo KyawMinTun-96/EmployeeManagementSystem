@@ -607,5 +607,104 @@ th:nth-child(5) {
 @media (max-width: 769px) {
     .h_body .h_content {
         flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+
+    .h_title h2 {
+        font-size: 20px;
+    }
+
+    .h_title, .d_title, 
+    .e_title, .p_title, 
+    .pj_title {
+        margin: 20px 0;
+        padding: 20px 0;
+    }
+
+    .h_box h3 {
+        font-size: 16px;
+    }
+
+    .h_box p {
+        font-size: 14px;
+    }
+
+    .e_body .e_content,
+    .d_body .d_content, 
+    .p_body .p_content, 
+    .pj_body .pj_content {
+        margin: 20px 0 10px;
+        padding: 20px 10px 30px;
+    }
+
+    .e_title, .d_title,
+    .p_title, .pj_title {
+        padding: 15px;
+    }
+
+    .e_title h2, .d_title h2,
+    .p_title h2, .pj_title h2 {
+        font-size: 18px;
+    }
+
+    table th {
+        font-size: 15px;
+
+    }
+
+    table td {
+        font-size: 13px;
+    }
+
+    th:nth-child(1) {
+        min-width: 30px;
+    }
+
+    .e_table th:nth-child(6) {
+        min-width: 90px; 
+        min-width: 70px;
+    }
+
+    .e_table th:nth-child(7) {
+        min-width: 100px;
+    }
+
+    .edit_btn, .delete_btn, .view_btn {
+        width: 25px;
+        height: 25px;
+    }
+
+    .pj_table th:nth-child(4) {
+        min-width: 90px;
+    }
+
+    .pj_table th:nth-child(5) {
+        min-width: 90px;
+    }
+
+    .pj_table th:nth-child(6) {
+        min-width: 70px;
+    }
+
+    .pj_table th:nth-child(7) {
+        min-width: 100px;
+    }
+    
+    i{
+        font-size: 13px;
+    }
+
+
+}
+
+
+@media (max-width: 426px) {
+
+    .e_body .e_content,
+    .d_body .d_content, 
+    .p_body .p_content, 
+    .pj_body .pj_content {
+        overflow: scroll;
     }
 }
+

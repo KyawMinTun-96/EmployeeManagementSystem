@@ -40,12 +40,12 @@
                 {% csrf_token %}
                 <div class="form-group mb-3">
                     <label for="name" class="control-label">Username:</label>
-                    <input type="text" class="form-control form-control-sm rounded-0" name="username" id="name">
+                    <input type="text" class="form-control form-control-sm rounded-0" name="username" id="name" required>
                 </div>
                 
                 <div class="form-group mb-3">
                     <label for="pwd" class="control-label">Password:</label>
-                    <input type="password" name="password" id="pwd" class="form-control form-control-sm rounded-0">
+                    <input type="password" name="password" id="pwd" class="form-control form-control-sm rounded-0" required>
                 </div>
                 
                 <div class="login_btn">
@@ -125,7 +125,7 @@
                     _this[0].reportValidity();
                     return false;
                 }
-                start_loader();
+
                 $.ajax({
                     headers: {
                         "X-CSRFToken": '{{csrf_token}}'
@@ -141,7 +141,6 @@
                     error: err => {
                         console.log(err)
                         alert_toast("An error occured", 'error');
-                        end_loader();
                     },
                     success: function(resp) {
                         if (typeof resp == 'object' && resp.status == 'success') {
@@ -151,13 +150,11 @@
                             el.text(resp.msg)
                         } else {
                             el.text("An error occured", 'error');
-                            end_loader();
                             console.err(resp)
                         }
                         _this.prepend(el)
                         el.show('slow')
                         $("html, body, .modal").scrollTop(0);
-                        end_loader()
                     }
 
                 });

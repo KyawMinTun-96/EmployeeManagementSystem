@@ -48,12 +48,6 @@
                 _this[0].reportValidity();
                 return false;
             }
-
-
-
-            start_loader();
-            
-
             
             $.ajax({
                 headers: {
@@ -70,7 +64,6 @@
                 error: err => {
                     console.log(err)
                     alert("An error occured", 'error');
-                    end_loader();
                 },
                 success: function(resp) {
                     if (typeof resp == 'object' && resp.status == 'success') {
@@ -84,7 +77,6 @@
                     } else {
 
                         el.text("An error occured", 'error');
-                        end_loader();
                         console.err(resp);
 
                     }
@@ -92,7 +84,6 @@
                     _this.prepend(el);
                     el.show('slow');
                     $("html, body, .modal").scrollTop(0);
-                    end_loader();
                 }
             });
         });
